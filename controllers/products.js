@@ -4,6 +4,7 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
+  this.id = Math.random().toString();
   const product = new Product(req.body.title);
   product.save();
   res.redirect('/');
@@ -11,8 +12,6 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render('shop', {prods: products, pageTitle: 'Shop', path: '/'});
+    res.render('shop', {prods: products, pageTitle: 'Shop', path: req.path});
   });
-  //  
-  // res.render('shop', {prods: products, pageTitle: 'Shop', path: '/'});
 };
